@@ -3,11 +3,19 @@ package com.example.demo.controller;
 import com.example.demo.model.Produto;
 import com.example.demo.service.ProdutoService;
 import com.example.demo.service.dto.ProdutoDTO;
+import com.example.demo.service.dto.ResultadoNomeView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -49,10 +57,15 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "/produto/nome/{descricao}")
-    public ResponseEntity<List<ProdutoDTO>> findByDescricao(@PathVariable String descricao) {
-        List<ProdutoDTO> produto = service.findByDescricao(descricao);
+    public ResponseEntity<List<ResultadoNomeView>> findByDescricao(@PathVariable String descricao) {
+        List<ResultadoNomeView> produto = service.findByDescricao(descricao);
         return ResponseEntity.ok().body(produto);
     }
 
 
 }
+
+
+
+
+

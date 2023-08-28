@@ -1,11 +1,13 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tbl_confeccao")
@@ -18,7 +20,7 @@ public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name="produto_descricao")
@@ -31,17 +33,18 @@ public class Produto implements Serializable {
     @Column(name="produto_valor")
     private Double valor;
 
-    @Column(name="produto_entrada")
-    private Integer entrada;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = { "produto" }, allowSetters = true)
+    private Set<Estoque> estoque = new HashSet<>();
 
     public Produto(){};
 
-    public Produto(Long id, String descricao, LocalDate data, Double valor, Integer entrada) {
+    public Produto(Long id, String descricao, LocalDate data, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.data = data;
         this.valor = valor;
-        this.entrada = entrada;
+
     }
 
     public Long getId() {
@@ -76,12 +79,12 @@ public class Produto implements Serializable {
         this.valor = valor;
     }
 
-    public Integer getEntrada() {
-        return entrada;
+    public Set<Estoque> getEstoque() {
+        return estoque;
     }
 
-    public void setEntrada(Integer entrada) {
-        this.entrada = entrada;
+    public void setEstoque(Set<Estoque> estoque) {
+        this.estoque = estoque;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class Produto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && Objects.equals(descricao, produto.descricao) && Objects.equals(data, produto.data) && Objects.equals(valor, produto.valor) && Objects.equals(entrada, produto.entrada);
+        return Objects.equals(id, produto.id);
     }
 
     @Override
@@ -104,7 +107,7 @@ public class Produto implements Serializable {
                 ", descricao='" + descricao + '\'' +
                 ", data=" + data +
                 ", valor=" + valor +
-                ", entrada='" + entrada + '\'' +
+                ", estoque=" + estoque +
                 '}';
     }
 }

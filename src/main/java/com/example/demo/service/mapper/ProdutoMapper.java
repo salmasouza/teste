@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 
 
 @Mapper(componentModel = "spring")
-public interface ProdutoMapper extends EntityMapper<ProdutoDTO, Produto> {}
+public interface ProdutoMapper extends EntityMapper<ProdutoDTO, Produto> {
+
+}
