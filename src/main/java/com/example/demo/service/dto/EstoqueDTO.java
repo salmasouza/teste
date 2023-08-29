@@ -21,7 +21,7 @@ public class EstoqueDTO implements Serializable {
 
     private Situacao situacao;
 
-    private Integer estorno;
+    private Estorno estorno;
 
     private ProdutoDTO produto;
 
@@ -33,8 +33,7 @@ public class EstoqueDTO implements Serializable {
         this.quantidade = quantidade;
         this.situacao = situacao;
         this.produto = produto;
-        setEstorno(estorno);
-
+        this.estorno = estorno;
     }
 
     public Long getId() {
@@ -70,14 +69,11 @@ public class EstoqueDTO implements Serializable {
     }
 
     public Estorno getEstorno() {
-        return Estorno.valueOf(estorno);
+        return estorno;
     }
 
     public void setEstorno(Estorno estorno) {
-        if(estorno != null){
-            this.estorno = estorno.getCodigo();
-        }
-
+        this.estorno = estorno;
     }
 
     @Override

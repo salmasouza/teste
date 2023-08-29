@@ -2,10 +2,10 @@ package com.example.demo.model.enumeration;
 
 public enum Estorno {
 
-    ESTORNADO(1),
-    NAO_ESTORNADO(2),
+    ESTORNADO(0),
+    NAO_ESTORNADO(1),
 
-    NAO_SOLICITADO(3);
+    NAO_SOLICITADO(2);
 
     private int codigo;
 
