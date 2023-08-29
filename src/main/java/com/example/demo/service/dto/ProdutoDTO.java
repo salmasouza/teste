@@ -1,6 +1,8 @@
 package com.example.demo.service.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -19,20 +21,19 @@ public class ProdutoDTO implements Serializable {
 
     private String descricao;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate data;
 
     private Double valor;
 
-    private Integer entrada;
-
     public ProdutoDTO(){};
 
-    public ProdutoDTO(Long id, String descricao, LocalDate data, Double valor, Integer entrada) {
+    public ProdutoDTO(Long id, String descricao, LocalDate data, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.data = data;
         this.valor = valor;
-        this.entrada = entrada;
+
     }
 
     public Long getId() {
@@ -67,13 +68,6 @@ public class ProdutoDTO implements Serializable {
         this.valor = valor;
     }
 
-    public Integer getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(Integer entrada) {
-        this.entrada = entrada;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -95,7 +89,6 @@ public class ProdutoDTO implements Serializable {
                 ", descricao='" + descricao + '\'' +
                 ", data=" + data +
                 ", valor=" + valor +
-                ", entrada=" + entrada +
                 '}';
     }
 }

@@ -25,9 +25,8 @@ public interface EstoqueService {
     Page<EstoqueDTO> findAll(Pageable pageable);
     Optional<EstoqueDTO> findOne(Long id);
 
-    List<EstoqueDTO> findEstoqueByProdututoID(Long idProdutos);
+    List<EstoqueDTO> findEstoqueByProdututoID(Long produtoId);
     void delete(Long idEstoque);
-
 
 
 

@@ -34,9 +34,9 @@ public class EstoqueController {
         this.estoqueService = estoqueService;
         this.estoqueRepository = estoqueRepository;
     }
-    @GetMapping("/estoque/produtos/{idProdutos}")
-    public ResponseEntity<List<EstoqueDTO>> getAllEstoqueProdutos(@PathVariable Long idProdutos) {
-        List<EstoqueDTO> listEstoqueDTO = estoqueService.findEstoqueByProdututoID(idProdutos);
+    @GetMapping("/estoque/produtos/{produtoId}")
+    public ResponseEntity<List<EstoqueDTO>> getAllEstoqueProdutos(@PathVariable Long produtoId) {
+        List<EstoqueDTO> listEstoqueDTO = estoqueService.findEstoqueByProdututoID(produtoId);
         return ResponseEntity.ok().body(listEstoqueDTO);
     }
     @PostMapping("/estoque")

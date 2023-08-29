@@ -1,10 +1,8 @@
 package com.example.demo.service.dto;
 
-public interface ResultadoNomeView {
+public interface ResultadoDataView {
 
     String getproduto_descricao();
     Integer getestoque_situacao();
     Integer getestoque_quantidade();
-
-
 }

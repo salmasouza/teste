@@ -33,7 +33,7 @@ public class Produto implements Serializable {
     @Column(name="produto_valor")
     private Double valor;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "produto" }, allowSetters = true)
     private Set<Estoque> estoque = new HashSet<>();
 

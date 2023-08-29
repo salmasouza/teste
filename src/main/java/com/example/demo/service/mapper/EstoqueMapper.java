@@ -12,10 +12,10 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface EstoqueMapper extends EntityMapper <EstoqueDTO, Estoque>{
 
-    @Mapping(target = "produto", source = "produto", qualifiedByName = "produtoId")
+    @Mapping(target = "produto", source = "produto", qualifiedByName = "idProduto")
     EstoqueDTO toDto(Estoque s);
 
-    @Named("produtoId")
+    @Named("idProduto")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ProdutoDTO toDtoProdutoId(Produto Produto);
