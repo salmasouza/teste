@@ -1,6 +1,7 @@
 package com.example.demo.service.dto;
 
 
+import com.example.demo.model.enumeration.Estorno;
 import com.example.demo.model.enumeration.Situacao;
 
 import java.io.Serializable;
@@ -20,16 +21,20 @@ public class EstoqueDTO implements Serializable {
 
     private Situacao situacao;
 
+    private Integer estorno;
+
     private ProdutoDTO produto;
 
     public EstoqueDTO() {
     }
 
-    public EstoqueDTO(Long id, Integer quantidade, Situacao situacao, ProdutoDTO produto) {
+    public EstoqueDTO(Long id, Integer quantidade, Situacao situacao,Estorno estorno, ProdutoDTO produto) {
         this.id = id;
         this.quantidade = quantidade;
         this.situacao = situacao;
         this.produto = produto;
+        setEstorno(estorno);
+
     }
 
     public Long getId() {
@@ -64,6 +69,17 @@ public class EstoqueDTO implements Serializable {
         this.produto = produto;
     }
 
+    public Estorno getEstorno() {
+        return Estorno.valueOf(estorno);
+    }
+
+    public void setEstorno(Estorno estorno) {
+        if(estorno != null){
+            this.estorno = estorno.getCodigo();
+        }
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,6 +99,7 @@ public class EstoqueDTO implements Serializable {
                 "id=" + id +
                 ", quantidade=" + quantidade +
                 ", situacao=" + situacao +
+                ", estorno=" + estorno +
                 ", produto=" + produto +
                 '}';
     }

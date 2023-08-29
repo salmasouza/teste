@@ -39,6 +39,8 @@ public class EstoqueController {
         List<EstoqueDTO> listEstoqueDTO = estoqueService.findEstoqueByProdututoID(produtoId);
         return ResponseEntity.ok().body(listEstoqueDTO);
     }
+
+    // CADASTRO DE ENTRADA E SAIDA DE ESTOQUE
     @PostMapping("/estoque")
     public ResponseEntity<EstoqueDTO> createEstoque(@RequestBody EstoqueDTO estoqueDTO) throws URISyntaxException {
         log.debug("REST request to save estoque : {}", estoqueDTO);
@@ -61,6 +63,8 @@ public class EstoqueController {
                 .headers(HeaderUtil.createEntityDeletionAlert("apiConfeccao", false, ENTITY_NAME, idEstoque.toString()))
                 .build();
     }
+
+    //ATUALIZAR ESTORNO DE SAIDA E ENTRADA
     @PatchMapping(value = "/estoque/{idEstoque}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<EstoqueDTO> partialUpdateEstoque(
             @PathVariable(value = "idEstoque", required = false) final Long idEstoque,
@@ -81,64 +85,3 @@ public class EstoqueController {
     }
 }
 
-//@RestController
-//@RequestMapping(value ="/api")
-//public class EstoqueContoller {
-//
-//    @Autowired
-//    private EstoqueService service;
-//
-//    @GetMapping(value = "/estoque")
-//    public ResponseEntity<List<Estoque>> findAll() {
-//        List<Estoque> list = service.findAll();
-//        return ResponseEntity.ok().body(list);
-//    }
-//
-//    @GetMapping(value = "/estoque/{id}")
-//    public ResponseEntity<Optional<Estoque>> findById(@PathVariable Long id) {
-//        Optional<Estoque> estoque = service.findById(id);
-//        return ResponseEntity.ok().body(estoque);
-//    }
-//
-//    @PostMapping(value = "/estoque")
-//    public ResponseEntity<Estoque> insert(@RequestBody Estoque estoque) {
-//        estoque = service.insert(estoque);
-//        return ResponseEntity.ok().body(estoque);
-//    }
-//
-//    @DeleteMapping(value = "/estoque/{id}")
-//    public ResponseEntity<Void> delete(@PathVariable Long id) {
-//        service.delete(id);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @PutMapping(value = "/estoque/{id}")
-//    public ResponseEntity<Estoque> update(@PathVariable Long id, @RequestBody Estoque estoque) {
-//        estoque = service.update(id, estoque);
-//        return ResponseEntity.ok().body(estoque);
-//
-//    }
-//
-//    @PostMapping("/estoque/entrada")
-//    public ResponseEntity<Estoque> cadastrarEntrada(@RequestBody Estoque entrada) {
-//
-//        Estoque estoque = service.cadastrarEntrada(entrada);
-//        return ResponseEntity.ok()
-//                .body(estoque);
-//    }
-//
-//    @PostMapping("/estoque/saida")
-//    public ResponseEntity<Estoque> cadastrarSaida(@RequestBody Estoque saida) {
-//        Estoque estoque = service.cadastrarSaida(saida);
-//        return ResponseEntity.ok()
-//                .body(estoque);
-//    }
-//
-//
-//
-////    @GetMapping(value = "/estoque/entrada/{situacao}")
-////    public ResponseEntity<List<Estoque>> findBySituacao(@PathVariable Integer situacao) {
-////        List<Estoque> entrada = service.findBySituacao(situacao);
-////        return ResponseEntity.ok().body(entrada);
-////    }
-//}

@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.Estoque;
+import com.example.demo.model.enumeration.Estorno;
 import com.example.demo.repository.EstoqueRepository;
 import com.example.demo.service.EstoqueService;
 import com.example.demo.service.dto.ComparativoView;
@@ -39,6 +40,7 @@ public class EstoqueServiceImpl implements EstoqueService{
     public EstoqueDTO save(EstoqueDTO estoqueDTO) {
         log.debug("Request to save Estoque : {}", estoqueDTO);
         Estoque estoque = estoqueMapper.toEntity(estoqueDTO);
+        estoque.setEstorno(Estorno.valueOf(2));
         estoque = estoqueRepository.save(estoque);
         return estoqueMapper.toDto(estoque);
     }
@@ -63,6 +65,7 @@ public class EstoqueServiceImpl implements EstoqueService{
                 .map(estoqueRepository::save)
                 .map(estoqueMapper::toDto);
     }
+
 
     @Override
     public Page<EstoqueDTO> findAll(Pageable pageable) {

@@ -45,6 +45,7 @@ public class ProdutoController {
 
     }
 
+    //BUSCAR TODOS OS PRODUTOS
     @GetMapping(value = "/produtos")
     public ResponseEntity<List<ProdutoDTO>> getAllProdutos(Pageable pageable) {
         log.debug("REST request to get a page of Produto");
@@ -55,6 +56,7 @@ public class ProdutoController {
 
     }
 
+    //BUSCA DE PRODUTO COMPARATIVO- ENTRADA E SAIDA
     @GetMapping(value = "/produtos/comparativo")
     public ResponseEntity<List<ComparativoView>> getComparativo(@RequestParam(required = false) Integer mes,
                                                                 @RequestParam(required = false) Integer dia,@RequestParam(required = false)  Integer ano,Pageable pageable) {
@@ -65,7 +67,7 @@ public class ProdutoController {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
 
     }
-
+//CADASTRO DE PRODUTO
     @PostMapping(value = "/produto")
     public ResponseEntity<ProdutoDTO> createProduto(@RequestBody ProdutoDTO produtoDTO) throws URISyntaxException {
         log.debug("REST request to save Produto : {}", produtoDTO);
@@ -79,7 +81,7 @@ public class ProdutoController {
                 .created(new URI("/api/rh/produto" + result.getId()))
                 .body(result);
     }
-
+    //DELETAR PRODUTO
     @DeleteMapping(value = "/produto/{produtoId}")
     public ResponseEntity<Void> deleteProduto(@PathVariable Long produtoId) {
         log.debug("REST request to delete Produto : {}", produtoId);
@@ -97,6 +99,7 @@ public class ProdutoController {
         return ResponseUtil.wrapOrNotFound(produtoDTO);
     }
 
+    //ALTERAÇÃO DE PRODUTO
     @PatchMapping(value = "/produto/{produtoId}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ProdutoDTO> partialUpdateProduto(
             @PathVariable(value = "produtoId", required = false) final Long produtoId,
@@ -116,6 +119,8 @@ public class ProdutoController {
         );
     }
 
+
+    //BUSCA DE PRODUTO PELO NOME
     @GetMapping("/produtos/nome/{descricao}")
     public ResponseEntity<List<ResultadoNomeView>> getProdutobyDescricao(@PathVariable String descricao, Pageable pageable) {
         log.debug("REST request to get Produto id: {}", descricao);
@@ -125,6 +130,7 @@ public class ProdutoController {
 
     }
 
+    ////BUSCA DE PRODUTO(SAIDA E ENTRADA) POR INTERVALO DE DATA
     @GetMapping("/produtos/data/nome/{descricao}")
     public ResponseEntity<List<ResultadoDataView>> getProdutobyData(@PathVariable String descricao, @RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFim, Pageable pageable) {
         log.debug("REST request to get Produto: {}", descricao, dataInicio, dataFim);
