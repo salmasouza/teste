@@ -4,6 +4,7 @@ package com.example.demo.service;
 import com.example.demo.model.Estoque;
 import com.example.demo.repository.EstoqueRepository;
 import com.example.demo.repository.ProdutoRepository;
+import com.example.demo.service.dto.ComparativoView;
 import com.example.demo.service.dto.EstoqueDTO;
 import com.example.demo.service.dto.ProdutoDTO;
 import org.springframework.beans.factory.annotation.Autowired;

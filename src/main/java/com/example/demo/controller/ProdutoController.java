@@ -4,6 +4,7 @@ import com.example.demo.controller.errors.BadRequestAlertException;
 import com.example.demo.model.Produto;
 import com.example.demo.repository.ProdutoRepository;
 import com.example.demo.service.ProdutoService;
+import com.example.demo.service.dto.ComparativoView;
 import com.example.demo.service.dto.ProdutoDTO;
 import com.example.demo.service.dto.ResultadoDataView;
 import com.example.demo.service.dto.ResultadoNomeView;
@@ -48,6 +49,17 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoDTO>> getAllProdutos(Pageable pageable) {
         log.debug("REST request to get a page of Produto");
         Page<ProdutoDTO> page = produtoService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+
+    }
+
+    @GetMapping(value = "/produtos/comparativo")
+    public ResponseEntity<List<ComparativoView>> getComparativo(@RequestParam(required = false) Integer mes,
+                                                                @RequestParam(required = false) Integer dia,@RequestParam(required = false)  Integer ano,Pageable pageable) {
+        log.debug("REST request to get a page of Produto");
+        Page<ComparativoView> page = produtoService.findByTodos(mes, dia, ano, pageable);
         HttpHeaders headers = PaginationUtil
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

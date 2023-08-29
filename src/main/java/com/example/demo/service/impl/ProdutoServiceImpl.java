@@ -4,10 +4,7 @@ import com.example.demo.model.Produto;
 import com.example.demo.repository.ProdutoRepository;
 import com.example.demo.service.EstoqueService;
 import com.example.demo.service.ProdutoService;
-import com.example.demo.service.dto.EstoqueDTO;
-import com.example.demo.service.dto.ProdutoDTO;
-import com.example.demo.service.dto.ResultadoDataView;
-import com.example.demo.service.dto.ResultadoNomeView;
+import com.example.demo.service.dto.*;
 import com.example.demo.service.mapper.ProdutoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +70,13 @@ public class ProdutoServiceImpl implements ProdutoService {
         log.debug("Request to get all Produto");
         return produtoRepository.findAll(pageable).map(produtoMapper::toDto);
     }
+
+    @Override
+    public Page<ComparativoView> findByTodos(Integer mes,Integer dia, Integer ano,Pageable pageable) {
+        log.debug("Request to get all Estoque");
+        return produtoRepository.findByTodos(mes, dia, ano,pageable);
+    }
+
 
     @Override
     public Optional<ProdutoDTO> findOne(Long id) {

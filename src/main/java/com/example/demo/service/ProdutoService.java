@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Produto;
 import com.example.demo.repository.ProdutoRepository;
+import com.example.demo.service.dto.ComparativoView;
 import com.example.demo.service.dto.ProdutoDTO;
 import com.example.demo.service.dto.ResultadoDataView;
 import com.example.demo.service.dto.ResultadoNomeView;
@@ -25,7 +26,7 @@ public interface ProdutoService {
     Page<ProdutoDTO> findAll(Pageable pageable);
     Optional<ProdutoDTO> findOne(Long id);
     void delete(Long idProduto);
-
+    Page<ComparativoView> findByTodos(Integer mes,Integer dia, Integer ano,Pageable pageable);
     Page<ResultadoNomeView> findByDescricao(String descricao, Pageable pageable);
 
     Page<ResultadoDataView> findByData(String descricao, LocalDate dataInicio, LocalDate dataFim, Pageable pageable);

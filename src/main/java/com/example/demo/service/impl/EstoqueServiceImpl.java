@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.Estoque;
 import com.example.demo.repository.EstoqueRepository;
 import com.example.demo.service.EstoqueService;
+import com.example.demo.service.dto.ComparativoView;
 import com.example.demo.service.dto.EstoqueDTO;
 import com.example.demo.service.mapper.EstoqueMapper;
 import org.slf4j.Logger;
@@ -68,6 +69,8 @@ public class EstoqueServiceImpl implements EstoqueService{
         log.debug("Request to get all Estoque");
         return estoqueRepository.findAll(pageable).map(estoqueMapper::toDto);
     }
+
+
 
     @Override
     public Optional<EstoqueDTO> findOne(Long id) {
